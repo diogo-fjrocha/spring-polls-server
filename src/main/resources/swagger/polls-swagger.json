@@ -56,14 +56,15 @@
 					"201": {
 						"description": "Created"
 					},
-					"401": {
-						"description": "Unauthorized"
-					},
-					"403": {
-						"description": "Forbidden"
-					},
-					"404": {
-						"description": "Not Found"
+					"default": {
+						"description": "Unexpected error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/Error"
+								}
+							}
+						}
 					}
 				}
 			}
@@ -111,7 +112,14 @@
 					"404": {
 						"description": "Not Found"
 					}
-				}
+				},
+				"security": [
+					{
+						"JWT": [
+							"global"
+						]
+					}
+				]
 			}
 		},
 		"/api/polls": {
@@ -284,7 +292,7 @@
 						"name": "accountNonExpired",
 						"in": "query",
 						"required": false,
-						"type": "boolean"
+						"type": "string"
 					},
 					{
 						"name": "accountNonLocked",
@@ -528,7 +536,7 @@
 				}
 			}
 		},
-		"/api/user/checkUsernameAvailability": {
+		"/api/user/checkUsernameStatus": {
 			"get": {
 				"tags": [
 					"user-controller"
@@ -578,16 +586,16 @@
 				],
 				"parameters": [
 					{
-						"name": "accountNonExpired",
+						"name": "accountActive",
 						"in": "query",
 						"required": false,
-						"type": "boolean"
+						"type": "string"
 					},
 					{
 						"name": "accountNonLocked",
 						"in": "query",
 						"required": false,
-						"type": "boolean"
+						"type": "string"
 					},
 					{
 						"name": "authorities[0].authority",
@@ -689,9 +697,6 @@
 					},
 					"403": {
 						"description": "Forbidden"
-					},
-					"404": {
-						"description": "Not Found"
 					}
 				}
 			}
@@ -1183,6 +1188,21 @@
 				}
 			},
 			"title": "VoteRequest"
+		},
+		"Error": {
+			"type": "object",
+			"properties": {
+				"code": {
+					"type": "string"
+				},
+				"message": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"code",
+				"message"
+			]
 		}
 	}
 }
