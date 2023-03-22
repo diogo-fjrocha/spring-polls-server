@@ -64,6 +64,7 @@ public class PollController {
 
     @GetMapping("/{pollId}")
     public PollResponse getPollById(@CurrentUser UserPrincipal currentUser,
+                                    @RequestParam(value = "username", defaultValue = "") int username,
                                     @PathVariable Long pollId) {
         return pollService.getPollById(pollId, currentUser);
     }
@@ -71,8 +72,8 @@ public class PollController {
     @PostMapping("/{pollId}/votes")
     @PreAuthorize("hasRole('USER')")
     public PollResponse castVote(@CurrentUser UserPrincipal currentUser,
-                         @PathVariable Long pollId,
-                         @Valid @RequestBody VoteRequest voteRequest) {
+                         @PathVariable Long pollId) {
+        VoteRequest voteRequest = null;
         return pollService.castVoteAndGetUpdatedPoll(pollId, voteRequest, currentUser);
     }
 
