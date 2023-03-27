@@ -516,9 +516,6 @@
 							"$ref": "#/definitions/UserIdentityAvailability"
 						}
 					},
-					"400": {
-						"description": "Error"
-					},
 					"401": {
 						"description": "Unauthorized"
 					},
