@@ -64,9 +64,6 @@
 					},
 					"404": {
 						"description": "Not Found"
-					},
-					"429": {
-						"description": "Too Many Requests"
 					}
 				}
 			}
@@ -518,6 +515,9 @@
 						"schema": {
 							"$ref": "#/definitions/UserIdentityAvailability"
 						}
+					},
+					"400": {
+						"description": "Error"
 					},
 					"401": {
 						"description": "Unauthorized"
