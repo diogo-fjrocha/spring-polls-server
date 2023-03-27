@@ -64,6 +64,9 @@
 					},
 					"404": {
 						"description": "Not Found"
+					},
+					"429": {
+						"description": "Too Many Requests"
 					}
 				}
 			}
